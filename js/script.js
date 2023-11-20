@@ -21,24 +21,27 @@ fetch("https://jsonplaceholder.typicode.com/users")
     nuevaInfoUsuarios.forEach((user) => {
         const userInList = document.createElement('li')
     
-        const infoUserInList = document.createElement('section')
-        infoUserInList.setAttribute('class', 'infoUsuario')
+        const infoUserInList = `
+        <section class="infoUsuario">
+            <section class="infoBasica">
+                <p><span>Nombre:</span>${user.name}</p>
+                <p><span>Edad:</span>${user.age}</p>
+                <p><span>Username:</span>${user.username}</p>
+                <p><span>Teléfono:</span>${user.phone}</p>
+                <p><span>Email:</span>${user.email}</p>
+            </section>
+            <section class="imgUsuario">
+                <img src="${user.img}"/>
+            </section>
+        </section>`
+        
+        const addressUserInList = `
+        <section class="direccionUsuario">
+            <p><span>Compañía:</span>${user.company.name}</p>
+            <p><span>Dirección:</span>${user.address.street}, ${user.address.suite}, ${user.address.city}</p>
+        </section>`
     
-        infoUserInList.innerHTML = `
-        <p><span>Nombre:</span>${user.name}</p>
-        <p><span>Edad:</span>${user.age}</p>
-        <p><span>Username:</span>${user.username}</p>
-        <p><span>Teléfono:</span>${user.phone}</p>
-        <p><span>Email:</span>${user.email}</p>`
-    
-        const addressUserInList = document.createElement('section')
-        addressUserInList.setAttribute('class', 'direccionUsuario')
-    
-        addressUserInList.innerHTML = `
-        <p><span>Compañía:</span>${user.company.name}</p>
-        <p><span>Dirección:</span>${user.address.street}, ${user.address.suite}, ${user.address.city}</p>`
-    
-        userInList.innerHTML = infoUserInList.innerHTML + `<img src="${user.img}"/>` + addressUserInList.innerHTML
+        userInList.innerHTML = infoUserInList + addressUserInList
         listUsers.appendChild(userInList)
     })
 })
